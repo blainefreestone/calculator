@@ -2,6 +2,7 @@ let operator;
 let firstNumber;
 let secondNumber;
 let displayValue = "";
+let isDisplayValueAnswer = false;
 
 buttons = document.querySelectorAll('button');
 display = document.querySelector('#display');
@@ -35,6 +36,12 @@ function operate(operator, firstNumber, secondNumber) {
 function updateDisplayValue(e) {
     btnValue = e.target.getAttribute('data-value');
     if (['1','2','3','4','5','6','7','8','9','0'].includes(btnValue)) {
+        
+        if (isDisplayValueAnswer) {
+            displayValue = "";
+            isDisplayValueAnswer = false;
+        }
+        
         displayValue += btnValue;
         display.textContent = displayValue;
     }
@@ -47,6 +54,7 @@ function updateDisplayValue(e) {
         secondNumber = displayValue * 1;
         displayValue = operate(operator, firstNumber, secondNumber);
         display.textContent = displayValue;
+        isDisplayValueAnswer = true;
     }
     else if (btnValue === 'c') {
         firstNumber = null;
